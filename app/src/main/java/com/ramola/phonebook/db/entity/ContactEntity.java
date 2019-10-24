@@ -15,21 +15,37 @@ public class ContactEntity implements Contact {
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return email;
     }
 
     @Override
     public String getContact() {
-        return null;
+        return contact;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
