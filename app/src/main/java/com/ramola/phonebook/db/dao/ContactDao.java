@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.ramola.phonebook.model.Contact;
+import com.ramola.phonebook.db.entity.ContactEntity;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import java.util.List;
 public interface ContactDao {
 
     @Query("Select * from contact")
-    LiveData<List<Contact>> loadAllContacts();
+    LiveData<List<ContactEntity>> loadAllContacts();
 
     @Query("Select * from contact where id = :contactId")
-    LiveData<Contact> loadContact(int contactId);
+    LiveData<ContactEntity> loadContact(int contactId);
 
     @Insert
-    int insertContact(Contact contact);
+    void insertContact(ContactEntity contact);
 
     @Update
-    int updateContact(Contact contact);
+    void updateContact(ContactEntity contact);
 }

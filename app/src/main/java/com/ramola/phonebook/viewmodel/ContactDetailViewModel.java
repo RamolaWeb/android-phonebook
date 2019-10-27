@@ -9,18 +9,18 @@ import androidx.lifecycle.MediatorLiveData;
 
 import com.ramola.phonebook.MainApplication;
 import com.ramola.phonebook.db.ContactRepository;
-import com.ramola.phonebook.model.Contact;
+import com.ramola.phonebook.db.entity.ContactEntity;
 
 public class ContactDetailViewModel extends AndroidViewModel {
     private ContactRepository repository;
-    private MediatorLiveData<Contact> observableContact;
+    private MediatorLiveData<ContactEntity> observableContact;
 
     public ContactDetailViewModel(@NonNull Application application) {
         super(application);
         repository = ((MainApplication) application).getRepository();
     }
 
-    public LiveData<Contact> getContact(int id) {
+    public LiveData<ContactEntity> getContact(int id) {
         return repository.getContact(id);
     }
 }
