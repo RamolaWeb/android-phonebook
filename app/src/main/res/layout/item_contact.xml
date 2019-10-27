@@ -4,8 +4,11 @@
     >
     <data>
         <variable
-            name="product"
-            type="com.ramola.phonebook.model.Contact" />
+            name="contact"
+            type="com.ramola.phonebook.db.entity.ContactEntity" />
+        <variable
+            name="callback"
+            type="com.ramola.phonebook.ui.ContactClickCallBack" />
     </data>
     <com.google.android.material.card.MaterialCardView
         style="@style/Widget.MaterialComponents.CardView"
@@ -14,6 +17,7 @@
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:onClick="@{() ->  callback.onClick(contact)}"
        >
 
         <LinearLayout
@@ -24,17 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/name_contact"
-                android:text="@{product.name}"/>
+                android:text="@{contact.name}"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/email_contact"
-                android:text="@{product.email}"/>
+                android:text="@{contact.email}"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/dob_contact"
-                android:text="@{product.contact}"/>
+                android:text="@{contact.contact}"/>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,4 @@
-package com.ramola.phonebook;
+package com.ramola.phonebook.ui;
 
 
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ramola.phonebook.R;
 import com.ramola.phonebook.databinding.ActivityAddContactBinding;
 import com.ramola.phonebook.db.entity.ContactEntity;
 import com.ramola.phonebook.viewmodel.AddContactViewModel;

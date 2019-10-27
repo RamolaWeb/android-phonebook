@@ -1,4 +1,4 @@
-package com.ramola.phonebook;
+package com.ramola.phonebook.ui;
 
 
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.ramola.phonebook.R;
 import com.ramola.phonebook.databinding.ContactListBinding;
 import com.ramola.phonebook.db.entity.ContactEntity;
 import com.ramola.phonebook.viewmodel.ContactListViewModel;
@@ -41,7 +42,16 @@ public class ContactList extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.list.setLayoutManager(layoutManager);
 
-        adapter = new ContactListAdapter();
+        adapter = new ContactListAdapter(new ContactClickCallBack() {
+            @Override
+            public void onClick(ContactEntity contactEntity) {
+                ContactDetail detailFragment = new ContactDetail();
+                Bundle bundle = new Bundle();
+                bundle.putInt(ContactDetail.CONTACT_ID, contactEntity.getId());
+                detailFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(ContactList.class.getSimpleName()).replace(R.id.frame_container, detailFragment, ContactDetail.class.getSimpleName()).commit();
+            }
+        });
 
         binding.list.setAdapter(adapter);
 

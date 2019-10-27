@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ramola.phonebook.MainApplication;
 import com.ramola.phonebook.db.ContactRepository;
@@ -22,5 +24,19 @@ public class ContactDetailViewModel extends AndroidViewModel {
 
     public LiveData<ContactEntity> getContact(int id) {
         return repository.getContact(id);
+    }
+
+    public static class Factory extends ViewModelProvider.NewInstanceFactory {
+        private final Application application;
+
+        public Factory(Application application) {
+            this.application = application;
+        }
+
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            return (T) new ContactDetailViewModel(application);
+        }
     }
 }
