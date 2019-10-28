@@ -5,4 +5,5 @@ public interface Contact {
     String getName();
     String getEmail();
     String getContact();
+    String getCompany();
 }

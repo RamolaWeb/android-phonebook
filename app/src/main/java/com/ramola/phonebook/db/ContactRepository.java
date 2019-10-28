@@ -56,7 +56,12 @@ public class ContactRepository {
 
     }
 
-    public void updateContact(ContactEntity contact) {
-        database.contactDao().updateContact(contact);
+    public void updateContact(final ContactEntity contact) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                database.contactDao().updateContact(contact);
+            }
+        });
     }
 }

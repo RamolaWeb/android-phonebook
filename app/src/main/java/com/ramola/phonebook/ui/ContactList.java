@@ -58,7 +58,10 @@ public class ContactList extends Fragment {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString(ContactDetail.MODE, "add");
                 AddContact contactFragment = new AddContact();
+                contactFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(ContactList.class.getSimpleName()).replace(R.id.frame_container, contactFragment, AddContact.class.getSimpleName()).commit();
             }
         });

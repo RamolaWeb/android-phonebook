@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,6 +25,10 @@ public class AddContactViewModel extends AndroidViewModel {
 
     public void updateContact(ContactEntity contact) {
         repository.updateContact(contact);
+    }
+
+    public LiveData<ContactEntity> getContact(int id) {
+        return repository.getContact(id);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ramola.phonebook.R;
@@ -40,6 +41,17 @@ public class AddContact extends Fragment {
         super.onActivityCreated(savedInstanceState);
         AddContactViewModel.Factory factory = new AddContactViewModel.Factory(requireActivity().getApplication());
         final AddContactViewModel model = new ViewModelProvider(this, factory).get(AddContactViewModel.class);
+        final Bundle bundle = getArguments();
+        final String mode = bundle.getString(ContactDetail.MODE, "add");
+        if (mode == ContactDetail.EDIT_MODE) {
+            int id = bundle.getInt(ContactDetail.CONTACT_ID);
+            model.getContact(id).observe(this, new Observer<ContactEntity>() {
+                @Override
+                public void onChanged(ContactEntity contactEntity) {
+                    binding.contentAddContact.setContact(contactEntity);
+                }
+            });
+        }
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,8 +61,16 @@ public class AddContact extends Fragment {
                 String contact = binding.contentAddContact.phoneInput.getText().toString();
 
                 if (!name.isEmpty() && !email.isEmpty() && !company.isEmpty() && !contact.isEmpty()) {
-                    ContactEntity contactEntity = new ContactEntity(name, email, contact, company);
-                    model.insertContact(contactEntity);
+
+                    if (mode == ContactDetail.EDIT_MODE) {
+                        int id = bundle.getInt(ContactDetail.CONTACT_ID);
+                        ContactEntity contactEntity = new ContactEntity(id, name, email, contact, company);
+                        model.updateContact(contactEntity);
+                    }
+                    else {
+                        ContactEntity contactEntity = new ContactEntity(name, email, contact, company);
+                        model.insertContact(contactEntity);
+                    }
                 }
             }
         });

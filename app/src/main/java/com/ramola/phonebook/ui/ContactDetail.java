@@ -25,6 +25,8 @@ public class ContactDetail extends Fragment {
     private FragmentContactDetailBinding binding;
 
     public static final String CONTACT_ID = "id";
+    public static final String EDIT_MODE = "edit";
+    public static final String MODE = "mode";
 
     public ContactDetail() {
         // Required empty public constructor
@@ -44,6 +46,19 @@ public class ContactDetail extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ContactDetailViewModel.Factory factory = new ContactDetailViewModel.Factory(requireActivity().getApplication());
         ContactDetailViewModel viewModel = new ViewModelProvider(this, factory).get(ContactDetailViewModel.class);
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = getArguments().getInt(CONTACT_ID);
+                AddContact addFragment = new AddContact();
+                Bundle bundle = new Bundle();
+                bundle.putInt(ContactDetail.CONTACT_ID, id);
+                bundle.putString(MODE, EDIT_MODE);
+                addFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(ContactDetail.class.getSimpleName())
+                        .replace(R.id.frame_container, addFragment, AddContact.class.getSimpleName()).commit();
+            }
+        });
         subscribeToModel(viewModel);
     }
 
