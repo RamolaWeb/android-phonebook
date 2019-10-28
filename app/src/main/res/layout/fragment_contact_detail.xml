@@ -6,6 +6,9 @@
         <variable
             name="contact"
             type="com.ramola.phonebook.db.entity.ContactEntity" />
+        <variable
+            name="callback"
+            type="com.ramola.phonebook.ui.ContactDetailCallBack" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -40,11 +43,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -55,13 +60,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/name_contact"
-                        android:text="@{contact.name}"/>
+                        android:text="@{contact.name}"
+                        android:textSize="18sp"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -72,12 +79,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/email_contact"
-                        android:text="@{contact.email}"/>
+                        android:text="@{contact.email}"
+                        android:textSize="18sp"
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -88,9 +98,46 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/dob_contact"
-                        android:text="@{contact.contact}"/>
+                        android:text="@{contact.contact}"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textAppearance="@android:style/TextAppearance.Material.Large"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/company_label_contact"
+                        android:text="Company"/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/company_contact"
+                        android:text="@{contact.company}"
+                        android:textSize="18sp"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_call"
+                        android:id="@+id/call_contact"
+                        android:layout_marginRight="10dp"
+                        android:onClick="@{() -> callback.onCall(contact)}"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:id="@+id/share_contact"
+                        android:onClick="@{() -> callback.onShare(contact)}"/>
+                </LinearLayout>
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
